@@ -5,7 +5,7 @@ public class WordFrequencyGame {
 
     public static final String ANY_SPACE_SEPARATOR = "\\s+";
 
-    public String getResult(String inputStr) {
+    public String calculateWordFrequencies(String inputStr) {
         String[] words = inputStr.split(ANY_SPACE_SEPARATOR);
         if (words.length == 1) {
             return inputStr + " 1";
