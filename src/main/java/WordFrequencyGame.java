@@ -3,9 +3,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.StringJoiner;
-import java.io.CharArrayWriter;
-
-import java.time.LocalDateTime;
 
 public class WordFrequencyGame {
 
@@ -41,7 +38,18 @@ public class WordFrequencyGame {
             inputList.add(input);
         }
         //get the map for the next step of sizing the same word
-        Map<String, List<Input>> map = getListMap(inputList);
+        Map<String, List<Input>> map1 = new HashMap<>();
+        for (Input input1 : inputList) {
+//       map.computeIfAbsent(input.getValue(), k -> new ArrayList<>()).add(input);
+            if (!map1.containsKey(input1.getValue())) {
+                ArrayList words1 = new ArrayList<>();
+                words1.add(input1);
+                map1.put(input1.getValue(), words1);
+            } else {
+                map1.get(input1.getValue()).add(input1);
+            }
+        }
+        Map<String, List<Input>> map = map1;
 
         List<Input> frequencies = new ArrayList<>();
         for (Map.Entry<String, List<Input>> entry : map.entrySet()) {
@@ -49,21 +57,6 @@ public class WordFrequencyGame {
             frequencies.add(input);
         }
         return frequencies;
-    }
-
-    private Map<String, List<Input>> getListMap(List<Input> inputList) {
-        Map<String, List<Input>> map = new HashMap<>();
-        for (Input input : inputList) {
-//       map.computeIfAbsent(input.getValue(), k -> new ArrayList<>()).add(input);
-            if (!map.containsKey(input.getValue())) {
-                ArrayList words = new ArrayList<>();
-                words.add(input);
-                map.put(input.getValue(), words);
-            } else {
-                map.get(input.getValue()).add(input);
-            }
-        }
-        return map;
     }
 
 
