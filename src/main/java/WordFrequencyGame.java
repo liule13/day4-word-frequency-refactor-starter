@@ -15,12 +15,12 @@ public class WordFrequencyGame {
             try {
                 //split the input string with 1 to n pieces of spaces
                 String[] words = inputStr.split(ANY_SPACE_SEPARATOR);
-                List<Input> frequencies = countFrequencies(words);
+                List<WordFrequency> frequencies = countFrequencies(words);
 
                 frequencies.sort((w1, w2) -> w2.getWordCount() - w1.getWordCount());
 
                 StringJoiner joiner = new StringJoiner("\n");
-                for (Input w : frequencies) {
+                for (WordFrequency w : frequencies) {
                     String s = w.getValue() + " " + w.getWordCount();
                     joiner.add(s);
                 }
@@ -31,13 +31,13 @@ public class WordFrequencyGame {
         }
     }
 
-    private List<Input> countFrequencies(String[] words) {
+    private List<WordFrequency> countFrequencies(String[] words) {
         Map<String, List<String>> groups = groupSameWords(words);
 
-        List<Input> frequencies = new ArrayList<>();
+        List<WordFrequency> frequencies = new ArrayList<>();
         for (Map.Entry<String, List<String>> entry : groups.entrySet()) {
-            Input input = new Input(entry.getKey(), entry.getValue().size());
-            frequencies.add(input);
+            WordFrequency wordFrequency = new WordFrequency(entry.getKey(), entry.getValue().size());
+            frequencies.add(wordFrequency);
         }
         return frequencies;
     }
