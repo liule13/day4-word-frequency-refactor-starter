@@ -1,8 +1,5 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.StringJoiner;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class WordFrequencyGame {
 
@@ -32,14 +29,11 @@ public class WordFrequencyGame {
     }
 
     private List<WordFrequency> countFrequencies(String[] words) {
-        Map<String, List<String>> groups = groupSameWords(words);
-
-        List<WordFrequency> frequencies = new ArrayList<>();
-        for (Map.Entry<String, List<String>> entry : groups.entrySet()) {
-            WordFrequency wordFrequency = new WordFrequency(entry.getKey(), entry.getValue().size());
-            frequencies.add(wordFrequency);
-        }
-        return frequencies;
+        return Arrays.stream(words)
+                .collect(Collectors.groupingBy(w -> w, Collectors.counting()))
+                .entrySet().stream()
+                .map(e -> new WordFrequency(e.getKey(), e.getValue().intValue()))
+                .collect(Collectors.toList());
     }
 
     private static Map<String, List<String>> groupSameWords(String[] words) {
