@@ -24,12 +24,10 @@ public class WordFrequencyGame {
     }
 
     private static String formatResult(List<WordFrequency> frequencies) {
-        StringJoiner joiner = new StringJoiner("\n");
-        for (WordFrequency w : frequencies) {
-            String s = w.getWord() + " " + w.getFrequency();
-            joiner.add(s);
-        }
-        return joiner.toString();
+        return frequencies.stream()
+                .sorted(Comparator.comparingInt(WordFrequency::getFrequency).reversed())
+                .map(f -> f.getWord() + " " + f.getFrequency())
+                .collect(Collectors.joining("\n"));
     }
 
     private List<WordFrequency> countFrequencies(String[] words) {
