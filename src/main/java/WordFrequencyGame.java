@@ -35,27 +35,4 @@ public class WordFrequencyGame {
                 .map(e -> new WordFrequency(e.getKey(), e.getValue().intValue()))
                 .collect(Collectors.toList());
     }
-
-    private static Map<String, List<String>> groupSameWords(String[] words) {
-        List<String> inputList = new ArrayList<>();
-        for (String s : words) {
-            inputList.add(s);
-        }
-        //get the map for the next step of sizing the same word
-        Map<String, List<String>> map = new HashMap<>();
-        for (String input : inputList) {
-//       map.computeIfAbsent(input.getValue(), k -> new ArrayList<>()).add(input);
-            if (!map.containsKey(input)) {
-                ArrayList words1 = new ArrayList<>();
-                words1.add(input);
-                map.put(input, words1);
-            } else {
-                map.get(input).add(input);
-            }
-        }
-
-        return map;
-    }
-
-
 }
