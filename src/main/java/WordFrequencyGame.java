@@ -17,11 +17,11 @@ public class WordFrequencyGame {
                 String[] words = inputStr.split(ANY_SPACE_SEPARATOR);
                 List<WordFrequency> frequencies = countFrequencies(words);
 
-                frequencies.sort((w1, w2) -> w2.getWordCount() - w1.getWordCount());
+                frequencies.sort((w1, w2) -> w2.getFrequency() - w1.getFrequency());
 
                 StringJoiner joiner = new StringJoiner("\n");
                 for (WordFrequency w : frequencies) {
-                    String s = w.getValue() + " " + w.getWordCount();
+                    String s = w.getWord() + " " + w.getFrequency();
                     joiner.add(s);
                 }
                 return joiner.toString();
